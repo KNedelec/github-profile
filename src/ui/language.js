@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import * as colors from './colors';
+
 const Color = styled.span`
   display: inline-block;
   background-color: ${props => props.color};
@@ -10,7 +12,7 @@ const Color = styled.span`
   margin-right: 0.5rem;
 `;
 const Lang = styled.span`
-  color: #586069;
+  color: ${colors.TEXT_DISABLED};
 `;
 
 export function Language(props) {
