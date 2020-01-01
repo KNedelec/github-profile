@@ -3,6 +3,7 @@ export { AppSection } from './app-section';
 export { Button } from './button';
 export { Card } from './card';
 export { Display } from './display';
+export { ErrorMessage } from './error-message';
 export { FlexPanel } from './flex-panel';
 export { FormField } from './form-field';
 export { Language } from './language';

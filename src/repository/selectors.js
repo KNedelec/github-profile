@@ -10,6 +10,9 @@ export const selectRepositoryIds = state => selectRepositoryState(state).ids;
 export const selectRepositoryTotalCount = state =>
   selectRepositoryState(state).totalCount;
 
+export const selectRepositoryFetchError = state =>
+  selectRepositoryState(state).fetchError;
+
 export const selectRepositoryIsLoading = state =>
   selectRepositoryState(state).isLoading;
 

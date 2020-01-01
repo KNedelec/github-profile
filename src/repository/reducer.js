@@ -11,11 +11,19 @@ export function repositoryReducer(state = getDefaultRepositoryState(), action) {
     case 'REPOSITORYLIST_REQUESTED':
       return {
         ...state,
+        fetchError: false,
         isLoading: true,
+      }
+    case 'REPOSITORY_RECEIVED_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        fetchError: true,
       }
     case 'REPOSITORYLIST_RECEIVED':
       return {
         ...state,
+        fetchError: false,
         isLoading: false,
         ids: _.uniq([
           ...state.ids,

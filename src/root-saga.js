@@ -1,6 +1,7 @@
 import { all, call, fork, take, put } from 'redux-saga/effects';
 
 import { profileSaga } from './profile/sagas';
+import { repositorySaga } from './repository/sagas';
 
 export function* rootSaga() {
   yield all([
@@ -11,5 +12,6 @@ export function* rootSaga() {
       }
     }),
     fork(profileSaga),
+    fork(repositorySaga),
   ]);
 }

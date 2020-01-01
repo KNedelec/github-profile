@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FormField } from './form-field';
-import { Button } from './button';
+import { FormField, Button, ErrorMessage } from './';
 
 const Container = getStyledContainer();
 const FieldContainer = getStyledFieldContainer();
 const ButtonContainer = getStyledButtonContainer();
-const ErrorMessage = getStyledErrorMessage();
 
 export function TokenForm(props) {
 
@@ -31,12 +29,6 @@ export function TokenForm(props) {
       </ButtonContainer>
     </Container>
   );
-}
-
-export function getStyledErrorMessage() {
-  return styled.span`
-    color: red;
-  `;
 }
 
 export function getStyledFormField() {

@@ -6,8 +6,8 @@ import { selectAuthStatus } from './auth/selectors';
 import * as profileSelectors from './profile/selectors';
 import * as repositorySelectors from './repository/selectors';
 import * as colors from './ui/colors';
-import { AppSection, Card, Display, FlexPanel, FormField, Loader, ProfilePage,
-  AsyncStatItem, TokenForm, RepoItem } from './ui';
+import { AppSection, Card, Display, ErrorMessage, FlexPanel, FormField, Loader,
+  ProfilePage, AsyncStatItem, TokenForm, RepoItem } from './ui';
 
 const AppContainer = getStyledAppContainer();
 
@@ -74,6 +74,13 @@ function profileSection(props) {
 }
 
 function repoSection(props) {
+  if (props.fetchRepositoriesError) {
+    return (
+      <ErrorMessage>
+        An error occured while fetching the repositories
+      </ErrorMessage>
+    );
+  }
   if (!props.repoFullyLoaded && !props.isLoadingRepositories) {
     return;
   }
@@ -98,6 +105,8 @@ function mapStateToProps(state) {
     authStatus: selectAuthStatus(state),
     isLoadingProfile: isLoading,
     profile,
+    fetchRepositoriesError:
+      repositorySelectors.selectRepositoryFetchError(state),
     totalRepositories:
       repositorySelectors.selectRepositoryTotalCount(state),
     isLoadingRepositories: repositorySelectors.selectRepositoryIsLoading(state),
