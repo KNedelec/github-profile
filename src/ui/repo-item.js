@@ -17,7 +17,7 @@ export function RepoItem(props) {
           { props.repoName }
         </Display>
         <Display lower>
-          { props.repoStars } stars
+          { props.repoStars } &#9733;
         </Display>
         <Display lower>
           { props.languages && props.languages.map(l => (
