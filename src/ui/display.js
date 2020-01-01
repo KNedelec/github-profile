@@ -6,11 +6,12 @@ const StyledDisplay = styled.div`
     switch(props.size) {
       case 'large': return '5.5rem';
       case 'medium': return '2.5rem';
-      case 'small': default:  return '1rem';
+      case 'small': return '1.75rem';
+      case 'vsmall': default:  return '1rem';
     }
   }};
   color: ${props => props.color || 'inherit'};
-  text-transform: uppercase;
+  text-transform: ${props => !props.lower ? 'uppercase' : 'inherit'};
 `;
 
 export const Display = props => <StyledDisplay {...props} />

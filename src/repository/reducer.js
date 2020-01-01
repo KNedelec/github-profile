@@ -3,9 +3,20 @@ import { getDefaultRepositoryState } from './state';
 
 export function repositoryReducer(state = getDefaultRepositoryState(), action) {
   switch(action.type) {
+    case 'PROFILE_RECEIVED':
+      return {
+        ...state,
+        totalCount: action.profile.repositories.totalCount,
+      }
+    case 'REPOSITORYLIST_REQUESTED':
+      return {
+        ...state,
+        isLoading: true,
+      }
     case 'REPOSITORYLIST_RECEIVED':
       return {
         ...state,
+        isLoading: false,
         ids: _.uniq([
           ...state.ids,
           ...action.repositories.map(r => r.node.id),
@@ -18,7 +29,6 @@ export function repositoryReducer(state = getDefaultRepositoryState(), action) {
             return acc;
           }, { ...state.byId }),
         last: _.tail(action.repositories).cursor,
-        fullyLoaded: true,
       }
     case 'TOKEN_CHANGED':
       return {
@@ -30,11 +40,15 @@ export function repositoryReducer(state = getDefaultRepositoryState(), action) {
 }
 
 function normalizeRepository(record) {
-  const { ref, stargazers, ...repository } = record.node;
+  const { ref, stargazers, languages, ...repository } = record.node;
 
   return {
     cursor: record.cursor,
     ...repository,
+    languages: languages.edges.map(e => ({
+      name: e.node.name,
+      color: e.node.color
+    })),
     totalStars: stargazers.totalCount,
     totalCommits: ref ? ref.target.history.totalCount : 0,
   }

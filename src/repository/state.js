@@ -1,8 +1,8 @@
 
 export function getDefaultRepositoryState() {
   return {
-    fullyLoaded: false,
-    totalCount: 0,
+    isLoading: false,
+    totalCount: -1,
     ids: [],
     byId: {},
     pageSize: 100,

@@ -40,6 +40,16 @@ const getRepositoryListQuery = (userId, count, after) => {
             ... on Repository {
               id
               name
+              description
+              languages(first: 3, orderBy:{direction: DESC, field: SIZE}) {
+                edges {
+                  node {
+                    name
+                    color
+
+                  }
+                }
+              }
               stargazers {
                 totalCount
               }

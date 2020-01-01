@@ -11,7 +11,7 @@ function getStyledPanel() {
   return styled.div`
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: ${props => props.align || 'center'};
     justify-content: middle;
     flex-direction: ${props => props.direction || 'row'};
     margin -0.5rem -0.5rem;

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { MAX_REPOSITORY_NB} from './config';
 
 export const selectRepositoryState = state => state.repository;
 
@@ -6,11 +7,17 @@ export const selectRepositoryMap = state => selectRepositoryState(state).byId;
 
 export const selectRepositoryIds = state => selectRepositoryState(state).ids;
 
-export const selectRepositoryIsFullyLoaded = state =>
-  selectRepositoryState(state).fullyLoaded;
-
 export const selectRepositoryTotalCount = state =>
   selectRepositoryState(state).totalCount;
+
+export const selectRepositoryIsLoading = state =>
+  selectRepositoryState(state).isLoading;
+
+export const selectRepositoryIsFullyLoaded = createSelector(
+  selectRepositoryIds,
+  selectRepositoryTotalCount,
+  (ids, count) => ids.length === count || ids.length === MAX_REPOSITORY_NB
+);
 
 export const selectRepositoryList = createSelector(
   selectRepositoryMap,

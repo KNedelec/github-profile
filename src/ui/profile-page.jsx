@@ -53,12 +53,12 @@ function getStyledImage() {
     flex: content;
     margin: 0.5rem;
     @media (max-width: 959px) and (min-width: 480px) {
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
     }
     @media (max-width: 479px) {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
     }
   `;
 }
@@ -69,7 +69,7 @@ function getStyledInfos() {
     display: flex;
     flex-direction: column;
     margin: 0.5rem;
-    min-width: 200px;
+    min-width: 180px;
   `;
 }
 function getStyledContainer() {

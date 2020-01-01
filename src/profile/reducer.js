@@ -6,17 +6,21 @@ export function profileReducer(state, action) {
       return {
         ...getDefaultProfileState(),
       }
-    case 'PROFILE_RECEIVED':
-      const { avatarUrl, name, login, bio } = action.profile;
+    case 'PROFILE_REQUESTED':
       return {
         ...state,
-        isFresh: true,
+        isLoading: true,
+      }
+    case 'PROFILE_RECEIVED':
+      const { id, avatarUrl, name, login, bio } = action.profile;
+      return {
+        ...state,
+        id,
         avatarUrl,
-        bio: `
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum laoreet aliquam arcu, a aliquet risus posuere vitae. Aliquam auctor blandit neque, id sodales libero vulputate ac. Donec auctor, libero eu vulputate mollis, turpis neque commodo massa, at auctor elit orci et ex. Integer vitae metus congue, vestibulum felis eu, vestibulum felis. Duis nec ex a est ultrices scelerisque ut non urna. Aliquam accumsan purus erat, eu lacinia dui rhoncus ut. Proin aliquet eros sit amet justo aliquam, at scelerisque nisl accumsan.
-        `,
+        bio,
         login,
         name,
+        isLoading: false,
       }
     default: return state;
   }

@@ -7,7 +7,7 @@ export function* rootSaga() {
     fork(function* () {
       while(true) {
         const changeAction = yield take('TOKEN_CHANGED');
-        yield put({ ...changeAction, type: 'REFRESH_PROFILE' });
+        yield put({ ...changeAction, type: 'PROFILE_REQUESTED' });
       }
     }),
     fork(profileSaga),
