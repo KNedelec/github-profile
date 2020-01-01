@@ -2,7 +2,7 @@
 export function getDefaultRepositoryState() {
   return {
     isLoading: false,
-    fetchError: true,
+    fetchError: false,
     totalCount: -1,
     ids: [],
     byId: {},

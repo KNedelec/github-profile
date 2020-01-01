@@ -1,3 +1,8 @@
+# Github-profile
+
+Display a github profile from its access token. This is a poc so there is no
+prod build, no tests, the error management is primitive, etc..
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

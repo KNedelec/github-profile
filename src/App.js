@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { selectAuthStatus } from './auth/selectors';
+import { selectAuthToken, selectAuthStatus } from './auth/selectors';
 import * as profileSelectors from './profile/selectors';
 import * as repositorySelectors from './repository/selectors';
 import * as colors from './ui/colors';
-import { AppSection, Card, Display, ErrorMessage, FlexPanel, FormField, Loader,
-  ProfilePage, AsyncStatItem, TokenForm, RepoItem } from './ui';
+import { AppSection, ErrorMessage, FlexPanel, Loader, ProfilePage, AsyncStatItem,
+  TokenForm, RepoItem } from './ui';
 
 const AppContainer = getStyledAppContainer();
 
@@ -103,6 +103,7 @@ function mapStateToProps(state) {
 
   return {
     authStatus: selectAuthStatus(state),
+    token: selectAuthToken(state),
     isLoadingProfile: isLoading,
     profile,
     fetchRepositoriesError:

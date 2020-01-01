@@ -16,6 +16,12 @@ function* fetch(action) {
 
   yield put({ type: 'REPOSITORYLIST_REQUESTED', profile });
 
+  /*
+   * fetch the repositories while they are less that totalCount or
+   * they are more than MAX_REPOSITORY_NB
+   */
+
+  // repository number to fetch
   const repositoryNb =
     _.min([profile.repositories.totalCount, MAX_REPOSITORY_NB]);
 

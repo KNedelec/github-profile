@@ -9,7 +9,7 @@ const ButtonContainer = getStyledButtonContainer();
 
 export function TokenForm(props) {
 
-  const [token, setToken] = React.useState('');
+  const [token, setToken] = React.useState(props.token || '');
 
   return (
     <Container>

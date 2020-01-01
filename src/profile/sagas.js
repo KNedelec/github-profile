@@ -4,7 +4,7 @@ import { selectAuthToken } from '../auth/selectors';
 import { fetchProfile } from '../datasource';
 
 export function* profileSaga() {
-  const profile = yield takeLatest('PROFILE_REQUESTED', fetch);
+  yield takeLatest('PROFILE_REQUESTED', fetch);
 }
 
 function* fetch() {

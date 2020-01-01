@@ -1,4 +1,4 @@
-import { all, call, fork, take, put } from 'redux-saga/effects';
+import { all, fork, take, put } from 'redux-saga/effects';
 
 import { profileSaga } from './profile/sagas';
 import { repositorySaga } from './repository/sagas';
