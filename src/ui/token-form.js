@@ -20,6 +20,11 @@ export function TokenForm(props) {
           onChange={e => setToken(e.currentTarget.value)}
           value={token}
         />
+    { props.authStatus === 'NO_CONNECTIVITY' && (
+      <ErrorMessage>
+        No connectivity, please check your internet connection
+      </ErrorMessage>
+    )}
     { props.authStatus === 'INVALID_TOKEN' && (
       <ErrorMessage>This token seems to be invalid</ErrorMessage>
     )}

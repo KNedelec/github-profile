@@ -11,6 +11,11 @@ export function authReducer(state, action) {
         ...state,
         authStatus: 'AUTHENTICATED',
       }
+    case 'NETWORK_ERROR':
+      return {
+        ...state,
+        authStatus: 'NO_CONNECTIVITY',
+      }
     case 'AUTH_ERROR':
       return {
         ...state,
