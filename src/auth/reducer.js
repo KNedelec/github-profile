@@ -6,6 +6,16 @@ export function authReducer(state, action) {
         ...state,
         token: action.token,
       }
+    case 'PROFILE_RECEIVED':
+      return {
+        ...state,
+        authStatus: 'AUTHENTICATED',
+      }
+    case 'AUTH_ERROR':
+      return {
+        ...state,
+        authStatus: action.error,
+      }
     default: return state;
   }
 }

@@ -14,29 +14,43 @@ function* fetch() {
   const token = yield select(selectAuthToken);
   const { profile, error } = yield call(fetchProfile, token);
 
-  if (profile) {
-    yield put({ type: 'PROFILE_RECEIVED', profile });
-    const userId = profile.id;
+  switch (error) {
+    case 'INVALID_TOKEN':
+      yield put({ type: 'AUTH_ERROR', error });
+      break;
 
-    yield put({ type: 'REPOSITORYLIST_REQUESTED', profile });
-    const repositoryNb =
-      _.min([profile.repositories.totalCount, MAX_REPOSITORY_NB]);
+    case 'NETWORK_ERROR':
+      yield put({ type: 'NETWORK_ERROR', error});
+      break;
 
-    let fullRepositoryList = [];
+    case 'UNKNOWN_ERROR':
+      yield put({ type: 'UNKNOWN_ERROR', error});
+      break;
 
-    while (fullRepositoryList.length < repositoryNb) {
-      const cursor = fullRepositoryList.length ?
-        fullRepositoryList[fullRepositoryList.length - 1].cursor : undefined;
+    default:
+      yield put({ type: 'PROFILE_RECEIVED', profile });
+      const userId = profile.id;
 
-      const { repositories, error } = yield call(fetchRepositoryList, token,
-        userId, 100, cursor);
+      yield put({ type: 'REPOSITORYLIST_REQUESTED', profile });
+      const repositoryNb =
+        _.min([profile.repositories.totalCount, MAX_REPOSITORY_NB]);
 
-      fullRepositoryList.push(...repositories);
-    }
+      let fullRepositoryList = [];
 
-    yield put({
-      type: 'REPOSITORYLIST_RECEIVED',
-      repositories: fullRepositoryList
-    });
+      while (fullRepositoryList.length < repositoryNb) {
+        const cursor = fullRepositoryList.length ?
+          fullRepositoryList[fullRepositoryList.length - 1].cursor : undefined;
+
+        const { repositories, error } = yield call(fetchRepositoryList, token,
+          userId, 100, cursor);
+
+        fullRepositoryList.push(...repositories);
+      }
+
+      yield put({
+        type: 'REPOSITORYLIST_RECEIVED',
+        repositories: fullRepositoryList
+      });
+      break;
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { selectAuthStatus } from './auth/selectors';
 import * as profileSelectors from './profile/selectors';
 import * as repositorySelectors from './repository/selectors';
 import * as colors from './ui/colors';
@@ -16,6 +17,7 @@ function App(props) {
       <AppSection title="Github access token">
         <TokenForm
           token={props.token} 
+          authStatus={props.authStatus}
           changeAccessToken={props.changeAccessToken} />
       </AppSection>
 
@@ -93,6 +95,7 @@ function mapStateToProps(state) {
     profileSelectors.selectProfileState(state);
 
   return {
+    authStatus: selectAuthStatus(state),
     isLoadingProfile: isLoading,
     profile,
     totalRepositories:

@@ -7,6 +7,7 @@ import { Button } from './button';
 const Container = getStyledContainer();
 const FieldContainer = getStyledFieldContainer();
 const ButtonContainer = getStyledButtonContainer();
+const ErrorMessage = getStyledErrorMessage();
 
 export function TokenForm(props) {
 
@@ -21,12 +22,26 @@ export function TokenForm(props) {
           onChange={e => setToken(e.currentTarget.value)}
           value={token}
         />
+    { props.authStatus === 'INVALID_TOKEN' && (
+      <ErrorMessage>This token seems to be invalid</ErrorMessage>
+    )}
       </FieldContainer>
       <ButtonContainer>
         <Button onClick={e => props.changeAccessToken(token)}>OK</Button>
       </ButtonContainer>
     </Container>
   );
+}
+
+export function getStyledErrorMessage() {
+  return styled.span`
+    color: red;
+  `;
+}
+
+export function getStyledFormField() {
+  return styled(FormField)`
+  `;
 }
 
 export function getStyledContainer() {

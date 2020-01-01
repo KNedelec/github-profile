@@ -7,22 +7,26 @@
  */
 export async function queryGraph(token, query) {
 
-  const response = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'Application/json',
-      'Authorization': `bearer ${token}`,
-    },
-    body: JSON.stringify({ query })
-  });
+  try {
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/json',
+        'Authorization': `bearer ${token}`,
+      },
+      body: JSON.stringify({ query })
+    });
 
-  if (response.ok) {
-    const result = await response.json();
+    if (response.ok) {
+      const result = await response.json();
 
-    return { data: result.data };
+      return { data: result.data };
+    }
+
+    return getError(response);
+  } catch (e) {
+    return { error: 'NETWORK_ERROR' };
   }
-
-  return getError(response);
 }
 
 /**

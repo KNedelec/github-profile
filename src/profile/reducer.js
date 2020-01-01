@@ -6,6 +6,12 @@ export function profileReducer(state, action) {
       return {
         ...getDefaultProfileState(),
       }
+    case 'AUTH_ERROR':
+    case 'NETWORK_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+      }
     case 'PROFILE_REQUESTED':
       return {
         ...state,

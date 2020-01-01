@@ -6,7 +6,7 @@ export async function fetchProfile(token) {
 
   return {
     error,
-    profile: data.viewer,
+    profile: !error && data.viewer,
   }
 }
 
@@ -20,7 +20,7 @@ export async function fetchRepositoryList(token, userId, count, after) {
 
   return {
     error,
-    repositories: data.viewer.repositories.edges,
+    repositories: !error && data.viewer.repositories.edges,
   }
 }
 
