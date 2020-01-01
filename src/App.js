@@ -6,7 +6,7 @@ import * as profileSelectors from './profile/selectors';
 import * as repositorySelectors from './repository/selectors';
 import * as colors from './ui/colors';
 import { AppSection, Card, Display, FlexPanel, FormField, Loader, ProfilePage,
-  StatItem, TokenForm, RepoItem } from './ui';
+  AsyncStatItem, TokenForm, RepoItem } from './ui';
 
 const AppContainer = getStyledAppContainer();
 
@@ -27,45 +27,6 @@ function App(props) {
   );
 }
 
-function commitStatItem(props) {
-  if (props.isLoadingRepositories) {
-    return <Card><Loader /></Card>
-  }
-
-  return (
-    <StatItem
-      color={colors.TERTIARY_COLOR}
-      statName="Commits"
-      statValue={props.totalCommits} />
-  );
-}
-
-function repoStatItem(props) {
-  if (props.isLoadingProfile) {
-    return <Card><Loader /></Card>
-  }
-
-  return (
-    <StatItem
-      color={colors.SECONDARY_COLOR}
-      statName="Repositories"
-      statValue={props.totalRepositories} />
-  );
-}
-
-function starsStatItem(props) {
-  if (props.isLoadingRepositories) {
-    return <Card><Loader /></Card>
-  }
-
-  return (
-    <StatItem
-      color={colors.PRIMARY_COLOR}
-      statName="Stargazers"
-      statValue={props.totalStars} />
-  );
-}
-
 function statSection(props) {
   if (!props.profile.id) {
     return;
@@ -74,9 +35,21 @@ function statSection(props) {
   return (
     <AppSection title="Stats">
       <FlexPanel>
-        { commitStatItem(props) }
-        { repoStatItem(props) }
-        { starsStatItem(props) }
+        <AsyncStatItem 
+          statName="commits"
+          statValue={props.totalCommits}
+          color={colors.TERTIARY_COLOR}
+          isLoading={props.isLoadingRepositories} />
+        <AsyncStatItem 
+          statName="Repositories"
+          statValue={props.totalRepositories}
+          color={colors.SECONDARY_COLOR}
+          isLoading={props.isLoadingProfile} />
+        <AsyncStatItem 
+          statName="Stargazers"
+          statValue={props.totalStars}
+          color={colors.PRIMARY_COLOR}
+          isLoading={props.isLoadingRepositories} />
       </FlexPanel>
     </AppSection>
   );

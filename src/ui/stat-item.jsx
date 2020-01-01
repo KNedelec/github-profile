@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card, FlexPanel, Display } from './';
+import { Card, FlexPanel, Display, Loader } from './';
 
 const StatCard = styled(Card)`
 `;
@@ -19,4 +19,11 @@ export function StatItem(props) {
       </FlexPanel>
     </StatCard>
   );
+}
+
+export function AsyncStatItem(props) {
+  if (props.isLoading) {
+    return <Card><Loader /></Card>
+  }
+  return <StatItem {...props } />;
 }
